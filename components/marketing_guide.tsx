@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Book, Target, MessageSquare, TrendingUp, Users, FileText, Zap, Shield } from 'lucide-react';
+import { Book, Target, MessageSquare, TrendingUp, Users, FileText, Zap, Shield, LucideIcon } from 'lucide-react';
+
+type SectionKey = 'positioning' | 'architecture' | 'messaging' | 'outcomes' | 'content';
 
 const MarketingGuide = () => {
-  const [activeSection, setActiveSection] = useState('positioning');
+  const [activeSection, setActiveSection] = useState<SectionKey>('positioning');
 
-  const sections = {
+  const sections: Record<SectionKey, { title: string; icon: LucideIcon; content: React.ReactNode }> = {
     positioning: {
       title: 'Core Positioning',
       icon: Target,
@@ -219,7 +221,7 @@ const MarketingGuide = () => {
               <div>
                 <h4 className="font-semibold">vs. Traditional Rules Engines</h4>
                 <p><strong>They say:</strong> "Powerful rules engine with unlimited flexibility"</p>
-                <p className="text-green-700"><strong>You say:</strong> "Can your team read this: IF (amount > 500 AND category IN ['travel','meals'] AND date_diff...)? Ours says: 'Approve travel expenses under $500 if submitted within 30 days'"</p>
+                <p className="text-green-700"><strong>You say:</strong> "Can your team read this: IF (amount &gt; 500 AND category IN ['travel','meals'] AND date_diff...)? Ours says: 'Approve travel expenses under $500 if submitted within 30 days'"</p>
               </div>
 
               <div>
@@ -496,7 +498,7 @@ const MarketingGuide = () => {
                   return (
                     <button
                       key={key}
-                      onClick={() => setActiveSection(key)}
+                      onClick={() => setActiveSection(key as SectionKey)}
                       className={`w-full text-left px-3 py-2 rounded flex items-center text-sm transition-colors ${
                         activeSection === key
                           ? 'bg-blue-100 text-blue-700 font-semibold'
